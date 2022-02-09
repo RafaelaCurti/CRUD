@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Data.Entity;
 
 namespace ProjetoModeloDDD.Infra.Data.Repositories
 {
     public class RepositoryBase<TEntity> : IDisposable, IRepositoryBase<TEntity> where TEntity : class
     {
-        protected ProjetoModeloContext Db = new ProjetoModeloContext();
+        protected CRUDModelContext Db = new CRUDModelContext();
 
         public void Add(TEntity obj)
         {
@@ -36,9 +36,6 @@ namespace ProjetoModeloDDD.Infra.Data.Repositories
             Db.SaveChanges();
         }
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

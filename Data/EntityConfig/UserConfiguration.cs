@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Entities;
+using System.Data.Entity.ModelConfiguration;
 
 namespace Data.EntityConfig
 {
@@ -10,19 +7,21 @@ namespace Data.EntityConfig
     {
         public UserConfiguration()
         {
-            HasKey(c => c.ClienteId);
+            HasKey(u => u.Id);
 
-            Property(c => c.Nome)
+            Property(u => u.Name)
                 .IsRequired()
-                .HasMaxLength(150);
+                .HasMaxLength(100);
 
-            Property(c => c.Sobrenome)
-                .IsRequired()
-                .HasMaxLength(150);
-
-            Property(c => c.Email)
+            Property(u => u.Birthday)
                 .IsRequired();
-
+            
+            Property(u => u.Email)
+                .IsRequired()
+                .HasMaxLength(100);
+            
+            Property(u => u.Telephone)
+                .IsRequired();
         }
     }
 }

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Interface;
+using Domain.Entities;
+using Domain.Interfaces.Services;
 
 namespace Application
 {
-    public class UserAppServiceAppServiceBase<User>, IUserAppService
+    public class UserAppService : BaseAppService<User>, IUserAppService
     {
         private readonly IUserService _userService;
 
@@ -18,5 +16,6 @@ namespace Application
 
     }
 }
+
 
 

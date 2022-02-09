@@ -1,45 +1,47 @@
-﻿using System;
+﻿using Application.Interface;
+using Domain.Interfaces.Services;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application
 {
-    private readonly IServiceBase<TEntity> _serviceBase;
-
-    public BaseAppService(IServiceBase<TEntity> serviceBase)
+    public class BaseAppService<TEntity> : IDisposable, IBaseAppService<TEntity> where TEntity : class
     {
-        _serviceBase = serviceBase;
-    }
+        private readonly IBaseService<TEntity> _serviceBase;
 
-    public void Add(TEntity obj)
-    {
-        _serviceBase.Add(obj);
-    }
+        public BaseAppService(IBaseService<TEntity> serviceBase)
+        {
+            _serviceBase = serviceBase;
+        }
 
-    public TEntity GetById(int id)
-    {
-        return _serviceBase.GetById(id);
-    }
+        public void Add(TEntity obj)
+        {
+            _serviceBase.Add(obj);
+        }
 
-    public IEnumerable<TEntity> GetAll()
-    {
-        return _serviceBase.GetAll();
-    }
+        public TEntity GetById(int id)
+        {
+            return _serviceBase.GetById(id);
+        }
 
-    public void Update(TEntity obj)
-    {
-        _serviceBase.Update(obj);
-    }
+        public IEnumerable<TEntity> GetAll()
+        {
+            return _serviceBase.GetAll();
+        }
 
-    public void Remove(TEntity obj)
-    {
-        _serviceBase.Remove(obj);
-    }
+        public void Update(TEntity obj)
+        {
+            _serviceBase.Update(obj);
+        }
 
-    public void Dispose()
-    {
-        _serviceBase.Dispose();
+        public void Remove(TEntity obj)
+        {
+            _serviceBase.Remove(obj);
+        }
+
+        public void Dispose()
+        {
+            _serviceBase.Dispose();
+        }
     }
 }

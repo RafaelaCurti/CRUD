@@ -47,5 +47,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserAppService.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{35E4D844-2E78-41C0-8FA8-1A9937F52048}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

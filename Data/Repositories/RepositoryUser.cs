@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Interfaces.Repositories;
+using ProjetoModeloDDD.Infra.Data.Repositories;
 
 namespace Data.Repositories
 {

@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Data.EntityConfig;
+using Domain.Entities;
+using System;
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Data.Context
 {
-    public class CRUDContext
+    public class CRUDContext : DbContext
     {
-        public CRUDModelContext()
+        public CRUDContext() 
                : base("Presentation")
         {
 
@@ -32,20 +33,21 @@ namespace Data.Context
             modelBuilder.Properties<string>()
                 .Configure(p => p.HasMaxLength(100));
 
-            modelBuilder.Configurations.Add(new UserConfiguration());       }
+            modelBuilder.Configurations.Add(new UserConfiguration());
+        }
 
         public override int SaveChanges()
         {
-            foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("DataCadastro") != null))
+            foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("DateRegister") != null))
             {
                 if (entry.State == EntityState.Added)
                 {
-                    entry.Property("DataCadastro").CurrentValue = DateTime.Now;
+                    entry.Property("DateRegister").CurrentValue = DateTime.Now;
                 }
 
                 if (entry.State == EntityState.Modified)
                 {
-                    entry.Property("DataCadastro").IsModified = false;
+                    entry.Property("DateRegister").IsModified = false;
                 }
             }
             return base.SaveChanges();

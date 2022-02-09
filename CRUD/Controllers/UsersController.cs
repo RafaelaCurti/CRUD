@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using AutoMapper;
+using Domain.Entities;
+using Presentation.ViewModels;
+using Application.Interface;
 
 namespace Presentation.Controllers
 {
@@ -10,30 +11,23 @@ namespace Presentation.Controllers
     {
         private readonly IUserAppService _userApp;
 
-        public UsersController(IUserAppService UserApp)
+        public UsersController(IUserAppService usereApp)
         {
-            _userApp = UserApp;
+            _userApp = usereApp;
         }
 
         public ActionResult Index()
         {
-            var UserViewModel = Mapper.Map<IEnumerable<User>, IEnumerable<UserViewModel>>(_userApp.GetAll());
-            return View(UserViewModel);
-        }
-
-        public ActionResult Especiais()
-        {
-            var UserViewModel = Mapper.Map<IEnumerable<User>, IEnumerable<UserViewModel>>(_userApp.ObterUsersEspeciais());
-
-            return View(UserViewModel);
+            var userViewModel = Mapper.Map<IEnumerable<User>, IEnumerable<UserViewModel>>(_userApp.GetAll());
+            return View(userViewModel);
         }
 
         public ActionResult Details(int id)
         {
-            var User = _userApp.GetById(id);
-            var UserViewModel = Mapper.Map<User, UserViewModel>(User);
+            var user = _userApp.GetById(id);
+            var userViewModel = Mapper.Map<User, UserViewModel>(user);
 
-            return View(UserViewModel);
+            return View(userViewModel);
         }
 
         public ActionResult Create()
@@ -43,56 +37,56 @@ namespace Presentation.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(UserViewModel User)
+        public ActionResult Create(UserViewModel user)
         {
             if (ModelState.IsValid)
             {
-                var UserDomain = Mapper.Map<UserViewModel, User>(User);
-                _userApp.Add(UserDomain);
+                var userDomain = Mapper.Map<UserViewModel, User>(user);
+                _userApp.Add(userDomain);
 
                 return RedirectToAction("Index");
             }
 
-            return View(User);
+            return View(user);
         }
 
         public ActionResult Edit(int id)
         {
-            var User = _userApp.GetById(id);
-            var UserViewModel = Mapper.Map<User, UserViewModel>(User);
+            var user = _userApp.GetById(id);
+            var userViewModel = Mapper.Map<User, UserViewModel>(user);
 
-            return View(UserViewModel);
+            return View(userViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(UserViewModel User)
+        public ActionResult Edit(UserViewModel user)
         {
             if (ModelState.IsValid)
             {
-                var UserDomain = Mapper.Map<UserViewModel, User>(User);
-                _userApp.Update(UserDomain);
+                var userDomain = Mapper.Map<UserViewModel, User>(user);
+                _userApp.Update(userDomain);
 
                 return RedirectToAction("Index");
             }
 
-            return View(User);
+            return View(user);
         }
 
         public ActionResult Delete(int id)
         {
-            var User = _userApp.GetById(id);
-            var UserViewModel = Mapper.Map<User, UserViewModel>(User);
+            var user = _userApp.GetById(id);
+            var userViewModel = Mapper.Map<User, UserViewModel>(user);
 
-            return View(UserViewModel);
+            return View(userViewModel);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var User = _userApp.GetById(id);
-            _userApp.Remove(User);
+            var user = _userApp.GetById(id);
+            _userApp.Remove(user);
 
             return RedirectToAction("Index");
         }
