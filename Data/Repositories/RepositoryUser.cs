@@ -1,9 +1,9 @@
-﻿using Domain.Interfaces.Repositories;
-using ProjetoModeloDDD.Infra.Data.Repositories;
+﻿using Domain.Entities;
+using Domain.Interfaces.Repositories;
 
 namespace Data.Repositories
 {
-    public class RepositoryUser : RepositoryBase<Users>, IUserRepository
+    public class RepositoryUser : RepositoryBase<User>, IUserRepository
     {
     }
 }
