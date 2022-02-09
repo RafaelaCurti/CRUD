@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Domain.Services
 {
-    public class UserService : ServiceBase<User>, IUserService
+    public class UserService : BaseService<User>, IUserService
     {
         private readonly IUserRepository _userRepository;
 

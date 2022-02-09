@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace Domain.Services
 {
-    public class ServiceBase<TEntity> : IDisposable, IBaseService<TEntity> where TEntity : class
+    public class BaseService<TEntity> : IDisposable, IBaseService<TEntity> where TEntity : class
     {
         private readonly IBaseRepository<TEntity> _repository;
 
-        public ServiceBase(IBaseRepository<TEntity> repository)
+        public BaseService(IBaseRepository<TEntity> repository)
         {
             _repository = repository;
         }
